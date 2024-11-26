@@ -1,0 +1,35 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: ocp-iostat-build
+spec:
+  steps:
+    - name: ocp-iostat-build-step
+      image: quay.io/buildah/stable:v1.37.3
+      securityContext:
+        capabilities:
+          add:
+          - SETFCAP
+      script: |
+        #!/bin/bash
+        mkdir -p rootfs/etc/pki/rpm-gpg
+        mkdir -p rootfs/etc/yum.repos.d
+        curl -sk https://raw.githubusercontent.com/gmeghnag/reproducer-03830354/refs/heads/main/rootfs/etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-Official > rootfs/etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-Official
+        curl -sk https://raw.githubusercontent.com/gmeghnag/reproducer-03830354/refs/heads/main/rootfs/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-9 > rootfs/etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-9
+        curl -sk https://raw.githubusercontent.com/gmeghnag/reproducer-03830354/refs/heads/main/rootfs/etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release > rootfs/etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+
+        curl -sk https://raw.githubusercontent.com/gmeghnag/reproducer-03830354/refs/heads/main/rootfs/etc/yum.repos.d/centos9.repo > rootfs/etc/yum.repos.d/centos9.repo
+        curl -sk https://raw.githubusercontent.com/gmeghnag/reproducer-03830354/refs/heads/main/rootfs/etc/yum.repos.d/epel.repo > rootfs/etc/yum.repos.d/epel.repo
+        curl -sk https://raw.githubusercontent.com/gmeghnag/reproducer-03830354/refs/heads/main/rootfs/etc/yum.repos.d/redhat9.repo > rootfs/etc/yum.repos.d/redhat9.repo
+
+        curl -sk https://raw.githubusercontent.com/gmeghnag/ocp-iostat-build/refs/heads/main/Dockerfile > Dockerfile
+        buildah bud --storage-driver vfs -v /etc/pki/entitlement:/etc/pki/entitlement:ro  -t image-registry.openshift-image-registry.svc:5000/ocp-iostat-build/iostat:latest .
+        buildah push --storage-driver vfs image-registry.openshift-image-registry.svc:5000/ocp-iostat-build/iostat:latest
+      volumeMounts:
+        - name: etc-pki-entitlement
+          mountPath: /etc/pki/entitlement
+          readOnly: false 
+  volumes:
+    - name: etc-pki-entitlement
+      secret:
+        secretName: etc-pki-entitlement

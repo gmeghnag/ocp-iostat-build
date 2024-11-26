@@ -1,0 +1,108 @@
+#
+# https://github.com/openshift/release/blob/01ccdead68f41831d6ec4cd6fadd43135c913420/core-services/release-controller/_repos/ocp-4.17-rhel9.repo
+# https://github.com/osbuild/osbuild-composer/blob/main/repositories/rhel-9.json
+# https://github.com/RedHatInsights/patchman-engine/blob/bbba97512313e51e37d43891fbc447a3b6b12bea/dev/kafka/upload.json#L157
+# https://github.com/noseka1/ansible-base/blob/ca396dca026ab40b6b302d9078b5b7598f185b4d/roles/openshift_rhel_entitlement/files/redhat9.repo
+#
+
+#
+# Certificate-Based Repositories
+# Managed by (rhsm) subscription-manager
+#
+# *** This file is auto-generated.  Changes made here will be over-written. ***
+# *** Use "subscription-manager repo-override --help" if you wish to make changes. ***
+#
+# If this file is empty and this system is subscribed consider
+# a "yum repolist" to refresh available repos
+#
+
+[rhel-9-for-x86_64-appstream-rpms]
+name = Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)
+baseurl = https://cdn.redhat.com/content/dist/rhel9/$releasever/x86_64/appstream/os
+enabled = 1
+gpgcheck = 1
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+sslverify = 0
+#sslcacert = /etc/rhsm/ca/redhat-uep.pem
+sslclientkey = /etc/pki/entitlement/entitlement-key.pem
+sslclientcert = /etc/pki/entitlement/entitlement.pem
+metadata_expire = 86400
+enabled_metadata = 1
+
+[rhel-9-for-x86_64-baseos-rpms]
+name = Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
+baseurl = https://cdn.redhat.com/content/dist/rhel9/$releasever/x86_64/baseos/os
+enabled = 1
+gpgcheck = 1
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+sslverify = 0
+#sslcacert = /etc/rhsm/ca/redhat-uep.pem
+sslclientkey = /etc/pki/entitlement/entitlement-key.pem
+sslclientcert = /etc/pki/entitlement/entitlement.pem
+metadata_expire = 86400
+enabled_metadata = 1
+
+[codeready-builder-for-rhel-9-x86_64-rpms]
+name = Red Hat CodeReady Linux Builder for RHEL 9 x86_64 (RPMs)
+baseurl = https://cdn.redhat.com/content/dist/rhel9/$releasever/x86_64/codeready-builder/os
+enabled = 1
+gpgcheck = 1
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+sslverify = 0
+#sslcacert = /etc/rhsm/ca/redhat-uep.pem
+sslclientkey = /etc/pki/entitlement/entitlement-key.pem
+sslclientcert = /etc/pki/entitlement/entitlement.pem
+metadata_expire = 86400
+enabled_metadata = 1
+
+[rhel-9-for-x86_64-baseos-debug-rpms]
+name = Red Hat Enterprise Linux 9 for x86_64 - BaseOS (Debug RPMs)
+baseurl = https://cdn.redhat.com/content/dist/rhel9/$releasever/x86_64/baseos/debug
+enabled = 0
+gpgcheck = 1
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+sslverify = 1
+sslcacert = /etc/rhsm/ca/redhat-uep.pem
+sslclientkey = /etc/pki/entitlement/entitlement-key.pem
+sslclientcert = /etc/pki/entitlement/entitlement.pem
+metadata_expire = 86400
+enabled_metadata = 1
+
+[rhel-9-for-x86_64-appstream-eus-rpms]
+name = Red Hat Enterprise Linux 9 for x86_64 - AppStream - Extended Update Support (RPMs)
+baseurl = https://cdn.redhat.com/content/eus/rhel9/9.2/x86_64/appstream/os
+enabled = 0
+gpgcheck = 1
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+sslverify = 1
+sslcacert = /etc/rhsm/ca/redhat-uep.pem
+sslclientkey = /etc/pki/entitlement/entitlement-key.pem
+sslclientcert = /etc/pki/entitlement/entitlement.pem
+metadata_expire = 86400
+enabled_metadata = 1
+
+[rhel-9-for-x86_64-baseos-eus-rpms]
+name = Red Hat Enterprise Linux 9 for x86_64 - BaseOS - Extended Update Support (RPMs)
+baseurl = https://cdn.redhat.com/content/eus/rhel9/9.2/x86_64/baseos/os
+enabled = 0
+gpgcheck = 1
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+sslverify = 1
+sslcacert = /etc/rhsm/ca/redhat-uep.pem
+sslclientkey = /etc/pki/entitlement/entitlement-key.pem
+sslclientcert = /etc/pki/entitlement/entitlement.pem
+metadata_expire = 86400
+enabled_metadata = 1
+
+[rhel-9-for-x86_64-baseos-eus-debug-rpms]
+name = Red Hat Enterprise Linux 9 for x86_64 - BaseOS - Extended Update Support (Debug RPMs)
+baseurl = https://cdn.redhat.com/content/eus/rhel9/9.2/x86_64/baseos/debug
+enabled = 0
+gpgcheck = 1
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redhat-release
+sslverify = 1
+sslcacert = /etc/rhsm/ca/redhat-uep.pem
+sslclientkey = /etc/pki/entitlement/entitlement-key.pem
+sslclientcert = /etc/pki/entitlement/entitlement.pem
+metadata_expire = 86400
+enabled_metadata = 1
